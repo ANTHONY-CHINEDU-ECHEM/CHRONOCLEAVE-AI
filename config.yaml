@@ -1,0 +1,30 @@
+# ChronoCleave AI configuration. Paths are relative to the repository root.
+seed: 21
+
+data:
+  n_patients: 16000
+  raw_path: data/raw/morphokinetics.csv
+  day3_transfer_share: 0.30
+  annotation_gap_rate: 0.03
+  split: {train: 0.70, val: 0.15, test: 0.15}
+
+training:
+  batch_size: 256
+  max_epochs: 40
+  patience: 6
+  weight_decay: 0.0001
+  # Each entry becomes one MLflow run.
+  sweep:
+    - {model: lstm, hidden: 32, layers: 1, dropout: 0.1, learning_rate: 0.003}
+    - {model: lstm, hidden: 64, layers: 2, dropout: 0.2, learning_rate: 0.002}
+    - {model: tcn, channels: 32, levels: 3, kernel: 3, dropout: 0.1, learning_rate: 0.003}
+    - {model: tcn, channels: 64, levels: 3, kernel: 3, dropout: 0.2, learning_rate: 0.002}
+
+mlflow:
+  tracking_uri: sqlite:///mlflow.db
+  experiment: chronocleave_implantation
+
+artifacts:
+  bundle: artifacts/chronocleave_bundle.pt
+  report_dir: reports
+  figure_dir: docs/images
