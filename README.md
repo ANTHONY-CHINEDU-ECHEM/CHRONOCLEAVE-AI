@@ -3,7 +3,7 @@
 **Sequence models that read an embryo's developmental timeline and estimate its chance of implanting**
 
 <p align="center">
-  <img src="docs/images/embryo_timeline.png" alt="Twelve annotated morphokinetic events for one embryo" width="900">
+  <img width="1760" height="496" alt="embryo_timeline" src="https://github.com/user-attachments/assets/89054dfb-0850-4855-80a4-d4722e46d29c" />
 </p>
 
 ## Project brief
@@ -43,8 +43,8 @@ On 3,866 embryos from patients the models never saw, the hierarchical rule score
   <tr><td><b>TCN (32 channels), served model</b></td><td align="center"><b>0.705</b></td><td align="center"><b>0.461</b></td><td align="center"><b>0.676</b></td><td align="center"><b>0.677</b></td><td align="center"><b>0.713</b></td></tr>
 </table>
 
-<p align="center"><img src="docs/images/roc_curves.png" alt="ROC curves for all models" width="470"></p>
-<p align="center"><img src="docs/images/model_comparison.png" alt="Model comparison on three metrics" width="900"></p>
+<p align="center"><img width="928" height="848" alt="roc_curves" src="https://github.com/user-attachments/assets/2ff46be7-818f-46ac-bf86-bf9f71b9a07f" /></p>
+<p align="center"><img width="2080" height="640" alt="model_comparison" src="https://github.com/user-attachments/assets/8c9a978f-81f6-4dc7-8ac2-6f159d13b66b" /></p>
 
 ### Sequence models match hand built intervals without being given them
 
@@ -56,7 +56,7 @@ For a laboratory the choice is therefore about operations, not accuracy. Interva
 
 Hiding one event at a time from the served model and measuring the loss in test AUC shows where the signal lives. Removing the start of blastulation (tSB) costs 0.041 and removing the full blastocyst time (tB) costs 0.026. Among cleavage events, t3 matters most (0.015), because it defines both the second cell cycle and direct cleavage. Most other single events can be dropped at a cost of about 0.005 or less, because neighbouring events let the model reconstruct the interval.
 
-<p align="center"><img src="docs/images/event_importance.png" alt="Loss of AUC when each event is hidden" width="620"></p>
+<p align="center"><img width="1312" height="624" alt="event_importance" src="https://github.com/user-attachments/assets/bebfbbb3-67ad-4ffc-a201-8cb7b92a63ff" /></p>
 
 The same point appears at cohort level. Every learned model is about 0.04 to 0.05 AUC better on day 5 transfers than on day 3 transfers. That gap is a measurable estimate of what extended culture adds to embryo selection, separate from its biological effects, and it is the kind of number a laboratory weighing day 3 against day 5 policies would want.
 
@@ -64,13 +64,13 @@ The same point appears at cohort level. Every learned model is about 0.04 to 0.0
 
 Embryos in the top quarter of TCN scores implanted 48.1 percent of the time. Those in the bottom quarter implanted 11.1 percent of the time, against an overall rate of 28.1 percent. Observed implantation rises steadily across score deciles and tracks the mean predicted score, so the output can be read as a probability and not only as a rank.
 
-<p align="center"><img src="docs/images/score_deciles.png" alt="Observed implantation rate by score decile" width="580"></p>
+<p align="center"><img width="1120" height="640" alt="score_deciles" src="https://github.com/user-attachments/assets/066b7e29-1f2b-4e18-bc56-53b619d61506" /></p>
 
 ### What the timing profiles look like
 
 Implanting embryos cluster inside the published t5 window (shaded), have tighter s2 values, rarely show a second cell cycle under five hours, and complete blastulation faster. The distributions overlap heavily, which is why single thresholds discriminate poorly and why combining markers helps.
 
-<p align="center"><img src="docs/images/timing_distributions.png" alt="Timing distributions by outcome" width="940"></p>
+<p align="center"><img width="2240" height="576" alt="timing_distributions" src="https://github.com/user-attachments/assets/019309f3-de96-4a65-885c-051483459fab" /></p>
 
 ### Every run is tracked and reproducible
 
@@ -87,7 +87,7 @@ One pipeline execution creates a parent MLflow run with seven nested runs. Basel
   <tr><td>tcn_64</td><td>sequence</td><td>3 levels, 64 channels, dropout 0.2</td><td align="center">0.720</td><td align="center">0.705</td></tr>
 </table>
 
-<p align="center"><img src="docs/images/learning_curves.png" alt="Validation AUC by epoch for each sweep run" width="580"></p>
+<p align="center"><img width="1120" height="624" alt="learning_curves" src="https://github.com/user-attachments/assets/151ec640-8a70-4777-8deb-0ea728f975a9" /></p>
 
 Selection among sequence models uses validation AUC only. Test metrics are logged for transparency and are never used to choose a model. Run `make ui` to browse the runs in the MLflow interface.
 
